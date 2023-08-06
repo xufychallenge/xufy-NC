@@ -1,0 +1,16 @@
+
+library(ggplot2)
+library(RColorBrewer)
+display.brewer.all()
+library(reshape2)
+otu <- read.delim("ACAL3.txt",header = TRUE)
+mydata <- melt(otu,id.vars=1,value.name="num")
+p <- ggplot(mydata,aes(as.factor(OTU.ID),num,fill=variable))+
+  geom_bar(stat="identity",width = 0.8,position = "fill",color="black")+
+  scale_fill_manual(values=c("#53868B","#D2B48C","#00CED1","#B0C4DE", "#FFB6C1","#EED2EE",  "#d80fc1",
+                              "#07a301", "#63ff4f")) +
+  theme_classic()
+dev.new(
+  noRStudioGD = TRUE
+)
+p
